@@ -6,7 +6,7 @@ pipeline {
 
   }
   stages {
-    stage('Say Hello') {
+    stage('Parallel execution') {
       parallel {
         stage('Say Hello') {
           steps {
@@ -14,10 +14,10 @@ pipeline {
           }
         }
 
-        stage('') {
+        stage('error') {
           agent {
             docker {
-              image 'gradle:6.8.3-jdk'
+              image 'gradle:6.8.3-jdk11'
             }
 
           }
