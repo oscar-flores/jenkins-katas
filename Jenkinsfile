@@ -7,8 +7,25 @@ pipeline {
   }
   stages {
     stage('Say Hello') {
-      steps {
-        sh 'echo "Hello World"'
+      parallel {
+        stage('Say Hello') {
+          steps {
+            sh 'echo "Hello World"'
+          }
+        }
+
+        stage('') {
+          agent {
+            docker {
+              image 'gradle:6.8.3-jdk'
+            }
+
+          }
+          steps {
+            sh 'ci/build-app.sh'
+          }
+        }
+
       }
     }
 
